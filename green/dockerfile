@@ -1,0 +1,17 @@
+# Install latest node version
+FROM node:latest
+
+# Pass the work directory program for blue code
+WORKDIR /green
+
+# Copy the package.json to app directory
+COPY package.json /green
+
+# Install  node package manager
+RUN npm install
+
+# Copy all files
+COPY . /green
+
+# Script pass
+CMD ["npm", "start"]
