@@ -10,8 +10,10 @@ git clone https://github.com/arsitektur-jaringan-komputer/blue-green-deployment.
 ## Section 2
 Panduan mendownload dari docker 
 
-``` Volt
+``` 
 https://hub.docker.com/r/kalyanaalk/blue-deployment 
+```
+```
 https://hub.docker.com/r/kalyanaalk/green-deployment
 ```
 ## Section 3
