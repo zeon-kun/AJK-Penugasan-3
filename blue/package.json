@@ -3,8 +3,11 @@
   "version": "1.0.0",
   "description": "blue server",
   "main": "blue.js",
+  "scripts": {
+    "start": "node blue.js"
+  },
   "dependencies": {
-    "body-parser": "^1.0.1",
-    "express": "^4.0.0"
+    "body-parser": "~1.0.1",
+    "express": "~4.0.0"
   }
 }
