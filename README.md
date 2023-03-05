@@ -95,7 +95,7 @@ docker run -p 8081:8081 -d blue/node-web-app
 #### * Setelah itu kita bisa cek container apa yang sedang running dengan syntax `docker ps`, hasilnya adalah:
 ![image](https://user-images.githubusercontent.com/91377782/222945266-31a95627-9e38-4ee2-9547-89138e86264a.png)
 
-#### * Maka images blue/node-web-app berhasil dijalankan. Lalu, kita coba buka di `http://localhost:8081/penugasan3`
+#### * Maka container blue/node-web-app berhasil dijalankan. Lalu, kita coba buka di `http://localhost:8081/penugasan3`
 
 ![image](https://user-images.githubusercontent.com/91377782/222945308-72e0088a-032a-41b1-af73-c831fb4347df.png)
 
