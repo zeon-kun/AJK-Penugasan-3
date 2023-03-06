@@ -7,7 +7,7 @@ Penugasan 3 Open Recruitment Admin Lab AJK
 git clone https://github.com/arsitektur-jaringan-komputer/blue-green-deployment.git
 ```
 
-## Section 2
+## Docker
 ### Membuat docker image dari blue deployment
 #### * Pertama-tama, kita ingin agar Node.js dapat dimasukkan ke dalam docker container
 
@@ -101,6 +101,7 @@ docker run -p 8081:8081 -d blue/node-web-app
 
 #### Telah muncul message `"Halo Camin - I'm BLUE"` maka images berhasil dijalankan
 
+### Membuat docker image dari green deployment
 
 
 
