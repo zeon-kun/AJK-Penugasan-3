@@ -54,7 +54,8 @@ RUN npm install
 COPY . .
 ```
 
-> Lalu kita tentukan port yang akan digunakan dalam aplikasi Node.js. Berdasarkan file `blue.js` kita akan gunakan port 8081
+> Lalu kita tentukan port yang akan digunakan dalam aplikasi Node.js. Berdasarkan file `blue.js` kita akan gunakan port 8081, seperti berikut
+
 ![image](https://user-images.githubusercontent.com/91377782/222944596-9cf64b92-bc61-4b22-a006-724700401a20.png)
 ``` Volt
 EXPOSE 8081
