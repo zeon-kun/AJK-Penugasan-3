@@ -102,13 +102,105 @@ docker run -p 8081:8081 -d blue/node-web-app
 #### Telah muncul message `"Halo Camin - I'm BLUE"` maka images berhasil dijalankan
 
 ### Membuat docker image dari green deployment
+#### Pembuatan docker image green deployment memiliki langkah - langkah yang sama dengan pembuatan docker image blue deployment
+#### * Langkah pertama, masukkan kode berikut ke dalam package.json
+```
+"scripts": {
+    "start": "node blue.js"
+ }
+ ```
+ 
+> Sehingga package.json akan berbentuk seperti
+
+```
+{
+    "name": "green",
+    "version": "1.0.0",
+    "description": "green server",
+    "main": "green.js",
+    "dependencies": {
+        "body-parser": "^1.20.2",
+        "express": "^4.18.2"
+    },
+    "scripts": {
+        "start": "node green.js"
+    }
+}
+```
+
+#### * Langkah kedua, `Dockerfile` dibentuk. Berikut merupakan isi dari `Dockerfile`:
+> Pada penggunaan `Dockerfile` ini, digunakan node dengan versi 14
+```
+FROM node:14
+```
+> Lalu, ditentukan work directory. Pada `Dockerfile` ini, digunakan `/app` sebagai tempat eksekusi command
+```
+WORKDIR /app
+```
+> Langkah selanjutnya adalah menuliskan command COPY ke dalam `Dockerfile`. Format penulisan commmand adalah sebagai berikut:
+```
+COPY <src> <dest>
+```
+> Command COPY ditulis sebagai berikut dikarenakan `package.json` disalin ke dalam working directory di docker image
+```
+COPY package.json ./
+```
+> Lalu, di dalam `Dockerfile` diinstall npm untuk mendapatkan dependencies yang dibutuhkan oleh Node.js
+```
+RUN npm install
+```
+> Command berikut digunakan untuk menyalin semua file yang ada di direktori saat ini (.) pada host ke direktori kerja saat ini (.) di dalam container.
+```
+COPY . .
+```
+> Digunakan port 8081 dalam menjalankan container ini. Penggunaan port 8081 sesuai dengan yang tertulis di file javascript. Berikut merupakan contoh screenshot penggunaan port yang tertulis di `green.js`
+```
+![image](https://user-images.githubusercontent.com/110476969/223018179-3c0fadab-f6e0-43e8-9568-9bbc6534f502.png)
+```
+```
+EXPOSE 8081
+```
+> Langkah terakhir adalah penulisan command CMD. Command ini digunakan untuk menspesifikasi command supaya dapat dieksekusi saat Docker container dimulai. Dalam hal ini, command berikut akan dieksekusi untuk memulai Node.js yang tertulis di `package.json`
+```
+CMD [ "npm", "start" ]
+```
+
+#### * Langkah berikutnya, melakukan build pada docker image
+> Berikut merupakan command yang dipakai untuk melakukan build docker image
+```
+docker build -t green:latest .
+```
+> Setelah itu, maka didapatkan docker image yang telah terbuild. Untuk melihat docker image yang ada, bisa dengan melakukan pengecekan menggunakan command berikut
+```
+docker images
+```
+> Didapatkan docker image yang sudah dibuild seperti berikut
+```
+![image](https://user-images.githubusercontent.com/110476969/223020516-36fbef47-5280-462c-83f6-d63cb0d93335.png)
+```
+
+#### * Selanjutnya, docker image akan di-run sehingga dapat dibuat docker container
+> Berikut merupakan command yang digunakan untuk melakukan run pada docker image
+```
+docker run -p 8081:8081 green:latest
+```
+> Setelah itu, dapat dicek docker container dengan command berikut
+```
+docker ps -a
+```
+> Sehingga docker container yang telah dibuild akan muncul seperti berikut
+```
+![image](https://user-images.githubusercontent.com/110476969/223021060-292e736a-6efc-42aa-bf72-5e7f9bc5781a.png)
+```
+
+#### * Langkah terakhir adalah melihat docker container yang telah dibuild dalam `http://localhost:8081/penugasan3`. Hasilnya adalah seperti berikut:
+```
+![image](https://user-images.githubusercontent.com/110476969/223021231-9bbd98e0-eaab-4a9b-abcc-ea99dbeac701.png)
+```
+> Dengan keluarnya output seperti ini, maka docker container berhasil dibuat
 
 
-
-
-
-
-
+### DockerHub
 
 Panduan mendownload dari docker 
 
