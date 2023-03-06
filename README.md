@@ -142,7 +142,7 @@ WORKDIR /app
 ``` Volt
 COPY <src> <dest>
 ```
-Command COPY ditulis sebagai berikut dikarenakan `package.json` disalin ke dalam working directory di docker image
+> > Command COPY ditulis sebagai berikut dikarenakan `package.json` disalin ke dalam working directory di docker image
 ``` Volt
 COPY package.json ./
 ```
