@@ -105,7 +105,7 @@ docker run -p 8081:8081 -d blue/node-web-app
 ### Membuat docker image dari green deployment
 #### Pembuatan docker image green deployment memiliki langkah - langkah yang sama dengan pembuatan docker image blue deployment
 #### * Langkah pertama, masukkan kode berikut ke dalam package.json
-```
+``` Volt
 "scripts": {
     "start": "node blue.js"
  }
@@ -113,7 +113,7 @@ docker run -p 8081:8081 -d blue/node-web-app
  
 > Sehingga package.json akan berbentuk seperti
 
-```
+``` Volt
 {
     "name": "green",
     "version": "1.0.0",
@@ -130,47 +130,47 @@ docker run -p 8081:8081 -d blue/node-web-app
 ```
 
 #### * Langkah kedua, `Dockerfile` dibentuk. Berikut merupakan isi dari `Dockerfile`:
-> Pada penggunaan `Dockerfile` ini, digunakan node dengan versi 14
-```
+> Langkah pertama, pada penggunaan `Dockerfile` ini, digunakan node dengan versi 14
+``` Volt
 FROM node:14
 ```
-> Lalu, ditentukan work directory. Pada `Dockerfile` ini, digunakan `/app` sebagai tempat eksekusi command
-```
+> Langkah kedua, ditentukan work directory. Pada `Dockerfile` ini, digunakan `/app` sebagai tempat eksekusi command
+``` Volt
 WORKDIR /app
 ```
 > Langkah selanjutnya adalah menuliskan command COPY ke dalam `Dockerfile`. Format penulisan commmand adalah sebagai berikut:
-```
+``` Volt
 COPY <src> <dest>
 ```
-> Command COPY ditulis sebagai berikut dikarenakan `package.json` disalin ke dalam working directory di docker image
-```
+Command COPY ditulis sebagai berikut dikarenakan `package.json` disalin ke dalam working directory di docker image
+``` Volt
 COPY package.json ./
 ```
-> Lalu, di dalam `Dockerfile` diinstall npm untuk mendapatkan dependencies yang dibutuhkan oleh Node.js
-```
+> Langkah keempat, di dalam `Dockerfile` diinstall npm untuk mendapatkan dependencies yang dibutuhkan oleh Node.js
+``` Volt
 RUN npm install
 ```
-> Command berikut digunakan untuk menyalin semua file yang ada di direktori saat ini (.) pada host ke direktori kerja saat ini (.) di dalam container.
-```
+> Langkah kelima, command berikut digunakan untuk menyalin semua file yang ada di direktori saat ini (.) pada host ke direktori kerja saat ini (.) di dalam container.
+``` Volt
 COPY . .
 ```
-> Digunakan port 8081 dalam menjalankan container ini. Penggunaan port 8081 sesuai dengan yang tertulis di file javascript. Berikut merupakan contoh screenshot penggunaan port yang tertulis di `green.js`
+> Langkah keenam, digunakan port 8081 dalam menjalankan container ini. Penggunaan port 8081 sesuai dengan yang tertulis di file javascript. Berikut merupakan contoh screenshot penggunaan port yang tertulis di `green.js`
 ![image](https://user-images.githubusercontent.com/110476969/223018179-3c0fadab-f6e0-43e8-9568-9bbc6534f502.png)
-```
+``` Volt
 EXPOSE 8081
 ```
 > Langkah terakhir adalah penulisan command CMD. Command ini digunakan untuk menspesifikasi command supaya dapat dieksekusi saat Docker container dimulai. Dalam hal ini, command berikut akan dieksekusi untuk memulai Node.js yang tertulis di `package.json`
-```
+``` Volt
 CMD [ "npm", "start" ]
 ```
 
 #### * Langkah berikutnya, melakukan build pada docker image
 > Berikut merupakan command yang dipakai untuk melakukan build docker image
-```
+``` Volt
 docker build -t green:latest .
 ```
 > Setelah itu, maka didapatkan docker image yang telah terbuild. Untuk melihat docker image yang ada, bisa dengan melakukan pengecekan menggunakan command berikut
-```
+``` Volt
 docker images
 ```
 > Didapatkan docker image yang sudah dibuild seperti berikut
@@ -179,11 +179,11 @@ docker images
 
 #### * Selanjutnya, docker image akan di-run sehingga dapat dibuat docker container
 > Berikut merupakan command yang digunakan untuk melakukan run pada docker image
-```
+```Volt
 docker run -p 8081:8081 green:latest
 ```
 > Setelah itu, dapat dicek docker container dengan command berikut
-```
+``` Volt
 docker ps -a
 ```
 > Sehingga docker container yang telah dibuild akan muncul seperti berikut
