@@ -138,12 +138,9 @@ FROM node:14
 ``` Volt
 WORKDIR /app
 ```
-> Langkah selanjutnya adalah menuliskan command COPY ke dalam `Dockerfile`. Format penulisan commmand adalah sebagai berikut:
+> Langkah selanjutnya adalah menuliskan command COPY ke dalam `Dockerfile`. Command COPY ditulis sebagai berikut dikarenakan `package.json` disalin ke dalam working directory di docker image. Format penulisan commmand dan implementasi command COPY adalah sebagai berikut dan
 ``` Volt
 COPY <src> <dest>
-```
-> > Command COPY ditulis sebagai berikut dikarenakan `package.json` disalin ke dalam working directory di docker image
-``` Volt
 COPY package.json ./
 ```
 > Langkah keempat, di dalam `Dockerfile` diinstall npm untuk mendapatkan dependencies yang dibutuhkan oleh Node.js
@@ -154,7 +151,7 @@ RUN npm install
 ``` Volt
 COPY . .
 ```
-> Langkah keenam, digunakan port 8081 dalam menjalankan container ini. Penggunaan port 8081 sesuai dengan yang tertulis di file javascript. Berikut merupakan contoh screenshot penggunaan port yang tertulis di `green.js`
+> Langkah keenam, digunakan port 8081 dalam menjalankan container ini. Penggunaan port 8081 sesuai dengan yang tertulis di file javascript. Berikut merupakan contoh screenshot penggunaan port yang tertulis di `green.js` dan juga command yang digunakan di dalam `Dockerfile`
 ![image](https://user-images.githubusercontent.com/110476969/223018179-3c0fadab-f6e0-43e8-9568-9bbc6534f502.png)
 ``` Volt
 EXPOSE 8081
