@@ -154,9 +154,7 @@ RUN npm install
 COPY . .
 ```
 > Digunakan port 8081 dalam menjalankan container ini. Penggunaan port 8081 sesuai dengan yang tertulis di file javascript. Berikut merupakan contoh screenshot penggunaan port yang tertulis di `green.js`
-```
 ![image](https://user-images.githubusercontent.com/110476969/223018179-3c0fadab-f6e0-43e8-9568-9bbc6534f502.png)
-```
 ```
 EXPOSE 8081
 ```
@@ -175,9 +173,8 @@ docker build -t green:latest .
 docker images
 ```
 > Didapatkan docker image yang sudah dibuild seperti berikut
-```
 ![image](https://user-images.githubusercontent.com/110476969/223020516-36fbef47-5280-462c-83f6-d63cb0d93335.png)
-```
+
 
 #### * Selanjutnya, docker image akan di-run sehingga dapat dibuat docker container
 > Berikut merupakan command yang digunakan untuk melakukan run pada docker image
@@ -189,14 +186,11 @@ docker run -p 8081:8081 green:latest
 docker ps -a
 ```
 > Sehingga docker container yang telah dibuild akan muncul seperti berikut
-```
 ![image](https://user-images.githubusercontent.com/110476969/223021060-292e736a-6efc-42aa-bf72-5e7f9bc5781a.png)
-```
+
 
 #### * Langkah terakhir adalah melihat docker container yang telah dibuild dalam `http://localhost:8081/penugasan3`. Hasilnya adalah seperti berikut:
-```
 ![image](https://user-images.githubusercontent.com/110476969/223021231-9bbd98e0-eaab-4a9b-abcc-ea99dbeac701.png)
-```
 > Dengan keluarnya output seperti ini, maka docker container berhasil dibuat
 
 
