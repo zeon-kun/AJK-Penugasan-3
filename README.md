@@ -107,7 +107,7 @@ docker run -p 8081:8081 -d blue/node-web-app
 #### * Langkah pertama, masukkan kode berikut ke dalam package.json
 ``` Volt
 "scripts": {
-    "start": "node blue.js"
+    "start": "node green.js"
  }
  ```
  
