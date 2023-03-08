@@ -205,12 +205,7 @@ https://hub.docker.com/r/kalyanaalk/green-deployment
 ## S3
 ### Membuat Bucket
 Dalam Amazon S3 setiap objek selalu disimpan pada sebuah 'bucket'. Maka dari itu sebelum memasukkan data pada amazon S3 terlebih dahulu harus membuat bucket terlebih dahulu.
-#### * 1. Sign in dan buka Amazon S3 console pada https://console.aws.amazon.com/s3/
-Berikut adalah akun yang digunakan untuk login pada console :
-```
-username: s3-test
-password: EvHE3A|{
-```
+#### * 1. Sign in dan buka Amazon S3 console
 
 #### * 2. Masuk pada menu bucket menggunakan fitur pencarian amazon kemudian create bucket
 Pada kolom pencarian yang ada pada konsole ketikkan buckets kemudian klik fitur buckets, setelahnya dapat langsung create bucket. Tampilan search adalah seperti gambar berikut:
