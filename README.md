@@ -202,4 +202,77 @@ https://hub.docker.com/r/kalyanaalk/blue-deployment
 ```
 https://hub.docker.com/r/kalyanaalk/green-deployment
 ```
-## Section 3
+## S3
+### Membuat Bucket
+Dalam Amazon S3 setiap objek selalu disimpan pada sebuah 'bucket'. Maka dari itu sebelum memasukkan data pada amazon S3 terlebih dahulu harus membuat bucket terlebih dahulu.
+#### * 1. Sign in dan buka Amazon S3 console pada https://console.aws.amazon.com/s3/
+Berikut adalah akun yang digunakan untuk login pada console :
+```
+username: s3-test
+password: EvHE3A|{
+```
+
+#### * 2. Masuk pada menu bucket menggunakan fitur pencarian amazon kemudian create bucket
+Pada kolom pencarian yang ada pada konsole ketikkan buckets kemudian klik fitur buckets, setelahnya dapat langsung create bucket. Tampilan search adalah seperti gambar berikut:
+<img width="1280" alt="Screenshot 2023-03-08 070802" src="https://user-images.githubusercontent.com/108170210/223585317-1f631514-dc4c-4e9a-90f7-bef7d12fe631.png">
+
+#### * 3. Masukkan informasi bucket seperti nama regian dan konfigurasi lain lainnya
+Ada beberapa peraturan yang harus diikuti dalam pengisian nama bucket yaitu :
+- Memiliki partisi unik. Partisi adalah pengelompokan Wilayah. AWS saat ini memiliki tiga partisi: aws (Standard Regions), aws-cn (China Regions), dan aws-us-gov (AWS GovCloud [US] Regions).
+- Rentang nama antara 3-63 karakter panjangnya
+- Hanya terdiri dari huruf kecil, angka, titik (.), dan tanda hubung (-).
+- Dimulai dan berakhir dengan huruf atau angka
+
+Berikut konfigurasi lainnya
+- Untuk Region, pilih Wilayah AWS tempat Anda ingin bucket berada. Disini digunakan Asia Pacific (Singapore) ap-southeast-1 sesuai permintaan soal.
+- Untuk Object Ownership pilih opsi recomended ACLs disabled.
+- Pada section Block Public Access settings for this bucket hanya centang pada opsi Block public and cross-account access to buckets and objects through any public bucket or access point policies. Jangan lupa untuk menyetujui pesan warning.
+- Selebihnya biarkan deafult
+Kemudian klik create bucket
+Setelah semua informasi terbuat maka diperoleh hasil sebagai berikut :
+<img width="889" alt="Screenshot 2023-03-08 072103" src="https://user-images.githubusercontent.com/108170210/223586724-d551b6dd-f93f-473b-a732-26f6dfda7951.png">
+
+### Membuat Konfigurasi YAML
+Konfigurasi YAML digunakan untuk otomatisasi docker blue and green build dari codebuildnya. Berikut adalah isi file oprec.yml
+```
+version: 0.2
+
+phases:
+  pre_build:
+    commands:
+      - echo Logging in to Amazon ECR...
+      - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com
+  build:
+    commands:
+      - echo Build started on `date`
+      - echo Building the Docker image...          
+      - docker build -t $IMAGE_REPO_NAME:blue ./blue/
+      - docker build -t $IMAGE_REPO_NAME:green ./green/
+      - docker tag $IMAGE_REPO_NAME:blue $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:blue
+      - docker tag $IMAGE_REPO_NAME:green $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:green
+  post_build:
+    commands:
+      - echo Build completed on `date`
+      - echo Pushing the Docker image...
+      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:blue
+      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:green
+```
+File YAML di atas adalah file konfigurasi untuk melakukan build dan push Docker image ke Amazon ECR menggunakan AWS CodeBuild. File tersebut terdiri dari tiga fase:
+
+1. Pre_build: Fase ini menjalankan perintah untuk login ke Amazon ECR menggunakan AWS CLI dan Docker. Pada fase ini, AWS CLI akan digunakan untuk mendapatkan password yang dibutuhkan untuk login ke ECR, dan perintah Docker login akan dijalankan dengan menggunakan username AWS dan password yang didapatkan dari AWS CLI.
+
+2. Build: Fase ini digunakan untuk membangun Docker image. Pada fase ini, beberapa perintah yang dijalankan adalah mencetak pesan build started on date, membangun Docker image menggunakan perintah Docker build, dan menandai Docker image dengan nama yang sesuai.
+
+3. Post_build: Fase ini digunakan untuk mendorong Docker image ke Amazon ECR. Pada fase ini, perintah untuk mencetak pesan build completed on date akan dijalankan, kemudian Docker image akan di-push ke ECR menggunakan perintah Docker push.
+
+### Mengupload object ke bucket
+Setelah membuat bucket di Amazon S3, Anda siap mengunggah objek ke bucket. Objek dapat berupa file apa saja: file teks, foto, video, dan sebagainya.
+Langkah memasukkan object pada bucket adalah sebagai berikut :
+1. Di daftar Bucket, pilih nama bucket tempat kita ingin mengunggah objek.
+2. Pada tab Objek untuk bucket, pilih Unggah.
+3. Di bawah File dan folder, pilih Tambahkan file.
+4. Pilih file untuk diunggah, lalu pilih open.
+5. Kemudian Upload
+<img width="751" alt="Screenshot 2023-03-08 074039" src="https://user-images.githubusercontent.com/108170210/223589179-4bcd6637-fe22-4f0b-bda9-9b9c8e0578ba.png">
+Setelahnya nama akan tampak pada daftar file di bucket sebagai berikut :
+<img width="1152" alt="Screenshot 2023-03-08 074141" src="https://user-images.githubusercontent.com/108170210/223589301-f0b884b5-8a5b-49f4-a090-c9280ae4f11d.png">
