@@ -212,5 +212,12 @@ Sesuai dengan infrastruktur AWS di penugasan. Maka sumber dari codebuild adalah 
         
 <img width="750" alt="image" src="https://user-images.githubusercontent.com/108170210/224335636-a5221b9e-f633-47de-b615-dd4995dcf80c.png">
 
-Selebihnya dari ketiga section tersebut biarkan deafult. Berikut adalah hasil dari codebuild yang sudah sukses
+Selebihnya dari ketiga section tersebut biarkan deafult. Berikut adalah hasil dari create codebuild yang sudah sukses
 <img width="1280" alt="image" src="https://user-images.githubusercontent.com/108170210/224334161-4cdf40fb-9490-4aad-a9f1-57820ec9c022.png">
+
+### Start Build 
+Setelah di create maka langkah selanjutnya adalah build. Dapat dilakukan dengan masuk ke Codebuild yang sudah dibuat dan klik start build.
+<img width="1280" alt="image" src="https://user-images.githubusercontent.com/108170210/224343381-b27cc7e1-66d6-422f-b819-93f265baf86f.png">
+Hasil build codebuild dapat dilihat pada bagian build history sebagai berikut:
+<img width="1280" alt="image" src="https://user-images.githubusercontent.com/108170210/224343855-5dde8607-f1d5-4d8b-8851-4a5af209c2bf.png">
+
