@@ -177,3 +177,40 @@ Langkah memasukkan object pada bucket adalah sebagai berikut :
 <img width="751" alt="Screenshot 2023-03-08 074039" src="https://user-images.githubusercontent.com/108170210/223589179-4bcd6637-fe22-4f0b-bda9-9b9c8e0578ba.png">
 Setelahnya nama akan tampak pada daftar file di bucket sebagai berikut :
 <img width="1152" alt="Screenshot 2023-03-08 074141" src="https://user-images.githubusercontent.com/108170210/223589301-f0b884b5-8a5b-49f4-a090-c9280ae4f11d.png">
+
+## Code Build
+Untuk melakukan run CodeBuild dapat langsung masuk ke service CodeBuild.
+
+### Create Build project
+Pada fitur create CodeBuild yang diubah adalah beberapa bagian yaitu 
+1. Project configuration
+<img width="1280" alt="image" src="https://user-images.githubusercontent.com/108170210/224338476-1c510374-df4a-4c71-bb42-dffba71a801b.png">
+
+2. Source
+Sesuai dengan infrastruktur AWS di penugasan. Maka sumber dari codebuild adalah yang terletak pada bucket s3. Sehingga isian bagaian ini adalah sebagai berikut :
+<img width="750" alt="image" src="https://user-images.githubusercontent.com/108170210/224337601-3497c2af-f212-46e9-af34-e0f2a40f5e19.png">
+
+3. Environment
+
+    a. Untuk Operating system, pilih Ubuntu.
+    
+    b. Untuk Runtime, pilih Standard.
+    
+    c. Untuk Image, pilih aws/codebuild/standard:4.0.
+    
+    d. Karena digunakan untuk build project to build a Docker image, maka checklist juga bagian Privileged.
+    
+<img width="1280" alt="image" src="https://user-images.githubusercontent.com/108170210/224335369-c7adddd9-a9f0-4b65-a722-cce7a47fabd6.png">
+
+    e. Pada bagian environment juga tambahkan Environment variables berikut :
+    
+        - AWS_DEFAULT_REGION dengan value region-ID
+        
+        - AWS_ACCOUNT_ID dengan value account-ID
+        
+        - IMAGE_REPO_NAME dengan value Repositori pada ECR
+        
+<img width="750" alt="image" src="https://user-images.githubusercontent.com/108170210/224335636-a5221b9e-f633-47de-b615-dd4995dcf80c.png">
+
+Selebihnya dari ketiga section tersebut biarkan deafult. Berikut adalah hasil dari codebuild yang sudah sukses
+<img width="1280" alt="image" src="https://user-images.githubusercontent.com/108170210/224334161-4cdf40fb-9490-4aad-a9f1-57820ec9c022.png">
