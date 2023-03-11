@@ -221,3 +221,17 @@ Setelah di create maka langkah selanjutnya adalah build. Dapat dilakukan dengan 
 Hasil build codebuild dapat dilihat pada bagian build history sebagai berikut:
 <img width="1280" alt="image" src="https://user-images.githubusercontent.com/108170210/224343855-5dde8607-f1d5-4d8b-8851-4a5af209c2bf.png">
 
+
+## Pembuatan ECR
+ECR dibuat sebagai tempat repository untuk pengerjaan di codebuild 
+<img width="1280" alt="image" src="https://github.com/AlfaDitoOnGithub/Priv/blob/main/Screenshot_31.png">
+diatas adalah repo terakhir yang digunakan untuk codebuild.
+Repo berisi image dari hasil build CodeBuild
+<img width="1280" alt="image" src="https://github.com/AlfaDitoOnGithub/Priv/blob/main/Screenshot_34.png">
+
+Konfigurasi untuk repositorinya sendiri adalah sebagai berikut
+<img width="1280" alt="image" src="https://github.com/AlfaDitoOnGithub/Priv/blob/main/Screenshot_32.png">
+<img width="1280" alt="image" src="https://github.com/AlfaDitoOnGithub/Priv/blob/main/Screenshot_33.png">
+
+
+
